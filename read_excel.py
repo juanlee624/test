@@ -7,27 +7,25 @@ from xlutils.copy import copy
 from connoracle import query_sql, insert_sql
 
 # fname = 'F:\\work\\总局项目\\20190426\\(模拟板)2018年度全国税务稽查统计报表（年报）.xls'  # Windows系统下的目录必须使用两个\
-fname='E:\study\python\data.xls'
+fname='F:\学习\practice\T_BICYCLE.xlsx'
 # 打开文件
 filename = xlrd.open_workbook(fname)
-# 获取当前文档的表(得到的是sheet的个数，一个整数）
-# sheets=filename.nsheets
-# 获取Excel中第四个sheet页
-# sheet = filename.sheets()[3]
-sheet = filename.sheets()
+names=filename.sheet_names() #获取文件中所有表单的名字
+print(names)#打印所有表单的名字
+sheets=filename.nsheets # 获取当前文档的表(得到的是sheet的个数，一个整数）
+sheet = filename.sheets()[0]#获取第一个表单的内容
 
-ts_hc = sheet.cell_value(6, 2)  # 偷税户次
-ts_cbsk = sheet.cell_value(6, 3)  # 偷税查补税款
-ts_znj = sheet.cell_value(6, 4)  # 偷税滞纳金
-ts_wfsd = sheet.cell_value(6, 5)  # 偷税没收违法所得
-ts_fk = sheet.cell_value(6, 6)  # 偷税罚款
-ts_cbze = sheet.cell_value(6, 7)  # 偷税查补总额
 
-jg = sheet.cell_value(2, 0)  # 报送机关
-jg = jg[5:]
-sql = "insert into MX_JCCGJK_SWJCCGB(SWJGMC,JCLASL,JCRKJE,SJCLSJ) values(:1, :2,:3,systimestamp)"
+name = sheet.cell_value(1, 0)  # 获取表单第二行第一列的数据
+lat = sheet.cell_value(1, 1)  # 获取表单第二行第二列的数据
+lng = sheet.cell_value(1, 2)  # 获取表单第二行第三列的数据
+capacity = sheet.cell_value(1, 3)  # 获取表单第二行第四列的数据
+availbike = sheet.cell_value(1, 4)  # 获取表单第二行第五列的数据
+address = sheet.cell_value(1, 5)  # 获取表单第三行第六列的数据
 
-data = [jg, ts_hc, ts_cbze]
+sql = "insert into T_BICYCLE(ID,NAME,LAT,LNG,CAPACITY,AVAILBIKE,ADDRESS,CREATETIME) values(:0, :1,:2,:3,:4,:5,systimestamp)"
+print(sql)
+data = [name,lat,lng,capacity,availbike,address]
 print(data)
 insert_sql(sql, data)
 
@@ -35,7 +33,6 @@ insert_sql(sql, data)
 nrows = sheet.nrows
 # 获取列数
 ncols = sheet.ncols
-print(jg)
 
 # ---------------------
 # 作者：磨刀大神

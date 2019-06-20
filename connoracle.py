@@ -9,7 +9,7 @@ os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 
 # 查询数据库，并返回数据
 def query_sql(v_sql):
-    conn = cx_Oracle.connect('username/password@ip:port/orcl')  # 连接数据库
+    conn = cx_Oracle.connect('APP_TOMS/APP_TOMS@122.224.168.146:65521/orcl')  # 连接数据库
     c = conn.cursor()  # 获取cursor
     try:
         # 解析sql语句
@@ -27,7 +27,7 @@ def query_sql(v_sql):
 
 # 访问数据库，插入数据
 def insert_sql(v_sql, data):
-    conn = cx_Oracle.connect('username/password@ip:port/orcl')
+    conn = cx_Oracle.connect('APP_TOMS/APP_TOMS@122.224.168.146:65521/orcl')
     c = conn.cursor()
     try:
         c.parse(v_sql)
@@ -40,7 +40,7 @@ def insert_sql(v_sql, data):
 
 
 def delete_sql(v_sql):
-    conn = cx_Oracle.connect('username/password@ip:port/orcl')
+    conn = cx_Oracle.connect('APP_TOMS/APP_TOMS@122.224.168.146:65521/orcl')
     c = conn.cursor()
     try:
         c.parse(v_sql)
@@ -51,12 +51,12 @@ def delete_sql(v_sql):
     c.close()
     conn.close()
 
-sql="select * from T_BICYCLE"
-q=query_sql(sql)
+# sql="select * from T_BICYCLE"
+# q=query_sql(sql)
 # print(q)
-for each in q:
-    isinstance(q,list)
-    print(each)
+# for each in q:
+#     isinstance(q,list)
+#     print(each)
 
 
 
