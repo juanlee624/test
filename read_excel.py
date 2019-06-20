@@ -23,7 +23,7 @@ capacity = sheet.cell_value(1, 3)  # 获取表单第二行第四列的数据
 availbike = sheet.cell_value(1, 4)  # 获取表单第二行第五列的数据
 address = sheet.cell_value(1, 5)  # 获取表单第三行第六列的数据
 
-sql = "insert into T_BICYCLE(ID,NAME,LAT,LNG,CAPACITY,AVAILBIKE,ADDRESS,CREATETIME) values(:0, :1,:2,:3,:4,:5,systimestamp)"
+sql = "insert into T_BICYCLE(NAME,LAT,LNG,CAPACITY,AVAILBIKE,ADDRESS,CREATETIME) values(:0, :1,:2,:3,:4,:5,systimestamp)"
 print(sql)
 data = [name,lat,lng,capacity,availbike,address]
 print(data)
