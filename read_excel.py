@@ -18,17 +18,9 @@ ncols = sheet.ncols # 获取查询表单的列数
 print('表单的列数：%d'%ncols)
 
 for i in range(1,nrows):
-
-     name = sheet.cell_value(i, 0)  # 获取表单第i行第一列的数据
-     lat = sheet.cell_value(i, 1)  # 获取表单第i行第二列的数据
-     lng = sheet.cell_value(i, 2)  # 获取表单第i行第三列的数据
-     capacity = sheet.cell_value(i, 3)  # 获取表单第i行第四列的数据
-     availbike = sheet.cell_value(i, 4)  # 获取表单第i行第五列的数据
-     address = sheet.cell_value(i, 5)  # 获取表单第i行第六列的数据
-
      sql = "insert into T_BICYCLE(NAME,LAT,LNG,CAPACITY,AVAILBIKE,ADDRESS,CREATETIME) values(:0,:1,:2,:3,:4,:5,systimestamp)"
      print(sql)
-     data = [name,lat,lng,capacity,availbike,address]
+     data = sheet.row_values(i, start_colx=0, end_colx=ncols - 1)
      print(data)
      insert_sql(sql, data)
 
